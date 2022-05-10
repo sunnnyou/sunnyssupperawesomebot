@@ -2,7 +2,6 @@ import random
 import re
 from urllib import request
 
-
 import asyncio
 import discord
 from discord.ext import commands
@@ -58,9 +57,12 @@ async def join(ctx):
 
 
 @client.command(pass_context=True, brief="Plays a song if you type in a search term after the command.")
-async def play(ctx, *, search):
+async def play(ctx, *, search=None):
     if not ctx.message.author.voice:
         await ctx.send('Enter a voice channel you dummy')
+        return
+    elif search is None:
+        await ctx.send("You have to type in a search term after the command you dummy")
         return
     else:
         await join(ctx)
@@ -83,15 +85,20 @@ async def play(ctx, *, search):
 
     # Looping over the youtube_video_list and playing the requests
     await play_music(ctx)
+    return
 
 
 async def play_music(ctx):
     while youtube_video_list is not None:
-
         # Gets Video out of playlist
         try:
             youtube_video = youtube_video_list.pop()
         except IndexError:
+            await asyncio.sleep(300)
+            while ctx.voice_client.is_playing() and ctx.voice:
+                raise IndexError
+            await ctx.send("Leaving voice channel due to inactivity")
+            await ctx.voice_client.disconnect()
             return
 
         # setting url for ffmpeg
@@ -109,6 +116,7 @@ async def play_music(ctx):
                 await asyncio.sleep(1)
             except RuntimeError:
                 return
+    return
 
 
 @client.command(pass_context=True, brief="Pauses the song.")
@@ -120,9 +128,9 @@ async def pause(self):
             self.voice_client.is_playing()
         else:
             await self.send("Song is Paused.")
-    except:
-        await self.send("Nothing is playing at all!")
-        return
+    except AttributeError:
+        await self.send("Bot is not playing anything!")
+    return
 
 
 @client.command(pass_context=True, brief="Resumes the song.")
@@ -134,25 +142,20 @@ async def resume(self):
             self.voice_client.is_playing()
         else:
             await self.send("The song is still playing.")
-    except:
-        await self.send("Nothing is playing at all!")
+    except AttributeError:
+        await self.send("Bot is not playing anything!")
+    return
 
 
 @client.command(pass_context=True, brief="Skips the current song.")
 async def skip(self):
-    try:
-        if not self.message.author.voice:
-            await self.send('Enter a voice channel you dummy!')
-        elif youtube_video_list is None:
-            await self.send('Nothing to skip!')
-        elif self.voice_client.is_playing():
-            self.voice_client.stop()
-            await self.send("Skipped the song")
-            await play(self)
-        else:
-            await self.send("Bot is not playing anything!")
-    except Exception:
-        print("An exception occured")
+    if self.voice_client.is_playing():
+        self.voice_client.stop()
+        await self.send("Skipped the song")
+        await play(self)
+    else:
+        await self.send("Nothing to skip!")
+    return
 
 
 @client.command(pass_context=True, brief="Stops the song.")
@@ -163,48 +166,46 @@ async def stop(self):
             await self.send("Stopping the damn song.")
         else:
             await self.send("Bot is not playing anything!")
-    except:
+    except AttributeError:
         await self.send("Bot is not playing anything!")
+    return
 
 
 @client.command(pass_context=True, brief="Leaves the channel.")
 async def leave(self):
-    voice = discord.utils.get(client.voice_clients, guild=self.guild)
     try:
-        if voice.is_connected():
-            await self.send("Bye, bitches.")
-    except:
-        print("Exception occured")
-    try:
-        await self.voice_client.disconnect()
-    except:
+        if self.voice_client.is_connected():
+            await self.send("Bye, have a great time.")
+            await self.voice_client.disconnect()
+    except AttributeError:
         await self.send("I'm not in any channel ... yet.")
+    return
 
 
 @client.command(pass_context=True, brief="Makes the bot angry at you.")
 async def fuckoff(ctx):
-    try:
-        await ctx.send("No, you fuck off.")
-    except:
-        print("An exception occured")
+    await ctx.send("No, you fuck off.")
+    return
 
 
-@client.command(pass_context=True, brief="Puts out a random quote from the quotes channel")
+@client.command(pass_context=True, brief="Sends a random quote from the quotes channel")
 async def quote(ctx):
     quotes_channel = discord.utils.get(ctx.guild.channels, name="quotes-channel", type=discord.ChannelType.text)
     messages = await quotes_channel.history(limit=500).flatten()
     randomMessage = random.choice(messages).content
     print("Quote was sent")
     await ctx.send(randomMessage)
+    return
 
 
-@client.command(pass_context=True, brief="Puts out a random quote from the quotes channel")
+@client.command(pass_context=True, brief="Sends a random meme")
 async def meme(ctx):
     sunnys_chat = discord.utils.get(ctx.guild.channels, name="sunnys-chat", type=discord.ChannelType.text)
     messages = await sunnys_chat.history(limit=500).flatten()
     randomMessage = random.choice(messages).content
     print("Meme was sent")
     await ctx.send(randomMessage)
+    return
 
 
 @client.event
@@ -237,7 +238,7 @@ async def on_message(message):
         "deutschland": "Ein Land, ein Reich, ein Kommentarbereich!",
         "germany": "Ein Land, ein Reich, ein Kommentarbereich!",
         "fortnite": "https://tenor.com/view/fortnite-default-dance-gif-13330926",
-        "69": "nice"
+        " 69 ": "nice"
     }
 
     # Checks if key is message and if true, sends a message containing the value
