@@ -194,7 +194,16 @@ async def quote(ctx):
     quotes_channel = discord.utils.get(ctx.guild.channels, name="quotes-channel", type=discord.ChannelType.text)
     messages = await quotes_channel.history(limit=500).flatten()
     randomMessage = random.choice(messages).content
-    print("nice")
+    print("Quote was sent")
+    await ctx.send(randomMessage)
+
+
+@client.command(pass_context=True, brief="Puts out a random quote from the quotes channel")
+async def meme(ctx):
+    sunnys_chat = discord.utils.get(ctx.guild.channels, name="sunnys-chat", type=discord.ChannelType.text)
+    messages = await sunnys_chat.history(limit=500).flatten()
+    randomMessage = random.choice(messages).content
+    print("Meme was sent")
     await ctx.send(randomMessage)
 
 
