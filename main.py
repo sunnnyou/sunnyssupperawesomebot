@@ -201,9 +201,8 @@ async def quote(ctx):
 async def on_message(message):
     if message.author == client.user or message.channel.name == 'quotes-channel':
         return
-    wordList = {"chad", "cheese", "vote", "twitter", "surgeon", "deutschland", "germany", ""}
 
-    switcher = {
+    responseList = {
         "chad": "https://i.kym-cdn.com/entries/icons/original/000/026/152/gigachad.jpg",
         "cheese": "https://www.youtube.com/watch?v=y3qrHn0WALs",
         "vote": "⚠️WARNING⚠️ \ncock inspection is NOT required at the voting booths!!!! don't be tricked like "
@@ -227,7 +226,10 @@ async def on_message(message):
         "fortnite": "https://tenor.com/view/fortnite-default-dance-gif-13330926",
         "69": "nice"
     }
-    await message.channel.send(switcher.get(message.content.lower()))
+
+    for key, value in responseList.items():
+        if key in message.content:
+            await message.channel.send(value)
 
 
 client.run(TOKEN)
