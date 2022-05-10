@@ -199,9 +199,12 @@ async def quote(ctx):
 
 @client.event
 async def on_message(message):
+    # Prevents the bot from looping if the response-value has a trigger-key from responseList
+    # Stops the bot from sending a message in the quotes-channel
     if message.author == client.user or message.channel.name == 'quotes-channel':
         return
 
+    # Dictionary with trigger word = key and response = value
     responseList = {
         "chad": "https://i.kym-cdn.com/entries/icons/original/000/026/152/gigachad.jpg",
         "cheese": "https://www.youtube.com/watch?v=y3qrHn0WALs",
@@ -227,9 +230,13 @@ async def on_message(message):
         "69": "nice"
     }
 
+    # Checks if key is message and if true, sends a message containing the value
     for key, value in responseList.items():
-        if key in message.content:
+        if key in message.content.lower():
             await message.channel.send(value)
+
+    # Makes the client.command methods work
+    await client.process_commands(message)
 
 
 client.run(TOKEN)
