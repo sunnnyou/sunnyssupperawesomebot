@@ -6,7 +6,7 @@ import asyncio
 import discord
 from discord.ext import commands
 from discord import FFmpegPCMAudio
-from youtube_dl import YoutubeDL
+from youtube_dl import YoutubeDL, DownloadError
 
 intents = discord.Intents.default()
 intents.members = True
@@ -103,7 +103,11 @@ async def play_music(ctx):
 
         # setting url for ffmpeg
         with YoutubeDL(YDL_OPTIONS) as ydl:
-            info = ydl.extract_info(youtube_video, download=False)
+            try:
+                info = ydl.extract_info(youtube_video, download=False)
+            except DownloadError:
+                print("Error occured while trying to fetch video")
+                await ctx.send("Error occured while trying to fetch video :(")
         URL = info['formats'][0]['url']
 
         # playing the song and putting out the name of the song in chat
