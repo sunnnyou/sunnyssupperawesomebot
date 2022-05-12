@@ -19,10 +19,16 @@ YDL_OPTIONS = {'format': 'bestaudio', 'noplaylist': 'True', 'outtmpl': 'ytdl/', 
 FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
 
 
+# executes starting methods if needed
 @client.event
 async def on_ready():
     print("Discord bot was started")
     print(client.is_ws_ratelimited())
+    await pip_league()
+
+
+# every 60 seconds it checks if pip is playing league and if he does it sends a message in general every hour
+async def pip_league():
     incelVille = discord.utils.get(client.guilds, id=794272408529797152)
     print(incelVille.name)
     general = discord.utils.get(incelVille.channels, id=794272408529797154)
@@ -31,17 +37,19 @@ async def on_ready():
     print(pip.name)
     print(pip.activity)
     while True:
-        for activity in pip.activities:
-            if activity.name == "League of Legends":
-                print("sent message about pip playing league")
-                await general.send("ATTENTION EVERYONE!\nPIP IS PLAYING LEAGUE!\nTHANK YOU FOR YOUR ATTENTION!")
-                print("sent message about pip playing league")
-                await asyncio.sleep(5)
-        await asyncio.sleep(5)
+        try:
+            for activity in pip.activities:
+                if activity.name == "League of Legends":
+                    print("sent message about pip playing league")
+                    await general.send("ATTENTION EVERYONE!\nPIP IS PLAYING LEAGUE!\nTHANK YOU FOR YOUR ATTENTION!")
+                    await asyncio.sleep(3600)
+            await asyncio.sleep(60)
+        except RuntimeError as e:
+            print(str(e))
+            return
 
 
 # Makes the bot join the voice channel the user is in
-@client.command(pass_context=True, brief="Makes the bot join the channel.")
 async def join(ctx):
     try:
         if not ctx.message.author.voice:
@@ -49,11 +57,12 @@ async def join(ctx):
             return
         else:
             vname = str(ctx.author.voice.channel)
-            print("Joined channel " + vname)
             voiceChannel = discord.utils.get(ctx.guild.voice_channels, name=vname)
             await voiceChannel.connect()
+            print("Joined channel " + vname)
     except discord.errors.ClientException:
         print("Already in a voice channel")
+    return
 
 
 @client.command(pass_context=True, brief="Plays a song if you type in a search term after the command.")
@@ -90,15 +99,18 @@ async def play(ctx, *, search=None):
 
 async def play_music(ctx):
     while youtube_video_list is not None:
-        # Gets Video out of playlist
+        # Gets Video out of playlist and leaves the voice channel after max 5 min if no music is playing anymore
         try:
             youtube_video = youtube_video_list.pop()
         except IndexError:
             await asyncio.sleep(300)
-            while ctx.voice_client.is_playing() and ctx.voice:
-                raise IndexError
-            await ctx.send("Leaving voice channel due to inactivity")
-            await ctx.voice_client.disconnect()
+            try:
+                if ctx.voice_client.is_playing():
+                    continue
+                await ctx.send("Leaving voice channel due to inactivity")
+                await ctx.voice_client.disconnect()
+            except AttributeError:
+                pass
             return
 
         # setting url for ffmpeg
@@ -166,11 +178,8 @@ async def skip(self):
 @client.command(pass_context=True, brief="Stops the song.")
 async def stop(self):
     try:
-        if self.voice_client.is_playing():
-            self.voice_client.stop()
-            await self.send("Stopping the damn song.")
-        else:
-            await self.send("Bot is not playing anything!")
+        self.voice_client.stop()
+        await self.send("Stopping the damn song.")
     except AttributeError:
         await self.send("Bot is not playing anything!")
     return
