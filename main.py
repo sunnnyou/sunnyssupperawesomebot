@@ -15,7 +15,7 @@ intents.presences = True
 TOKEN = "OTI2MDcyODUwMzA4Mjc2MjM0.Yc2WjQ.kgZ0Rfu9h5Pvlkr7loQnzjrfldM"
 client = commands.Bot(command_prefix="!", intents=intents)
 youtube_video_list = []
-YDL_OPTIONS = {'format': 'bestaudio', 'noplaylist': 'True', 'outtmpl': 'ytdl/'}
+YDL_OPTIONS = {'format': 'bestaudio', 'noplaylist': 'True', 'outtmpl': 'ytdl/', 'verbose': 'True'}
 FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
 
 
@@ -108,6 +108,7 @@ async def play_music(ctx):
             except DownloadError:
                 print("Error occurred while trying to fetch video")
                 await ctx.send("Error occurred while trying to fetch video :(")
+                return
         URL = info['formats'][0]['url']
 
         # playing the song and putting out the name of the song in chat
