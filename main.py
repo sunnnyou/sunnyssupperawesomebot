@@ -106,8 +106,8 @@ async def play_music(ctx):
             try:
                 info = ydl.extract_info(youtube_video, download=False)
             except DownloadError:
-                print("Error occured while trying to fetch video")
-                await ctx.send("Error occured while trying to fetch video :(")
+                print("Error occurred while trying to fetch video")
+                await ctx.send("Error occurred while trying to fetch video :(")
         URL = info['formats'][0]['url']
 
         # playing the song and putting out the name of the song in chat
