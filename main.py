@@ -24,10 +24,10 @@ FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconne
 async def on_ready():
     print("Discord bot was started")
     print(client.is_ws_ratelimited())
-    await pip_league()
+    # await pip_league()
 
 
-# every 60 seconds it checks if pip is playing league and if he does it sends a message in general every hour
+# every 60 seconds it checks if pip is playing league and if he does it will send a message in general every hour
 async def pip_league():
     incelVille = discord.utils.get(client.guilds, id=794272408529797152)
     print(incelVille.name)
@@ -36,17 +36,17 @@ async def pip_league():
     pip = incelVille.get_member(385826918844596224)
     print(pip.name)
     print(pip.activity)
-    while True:
-        try:
+    try:
+        while True:
             for activity in pip.activities:
                 if activity.name == "League of Legends":
                     print("sent message about pip playing league")
                     await general.send("ATTENTION EVERYONE!\nPIP IS PLAYING LEAGUE!\nTHANK YOU FOR YOUR ATTENTION!")
                     await asyncio.sleep(3600)
             await asyncio.sleep(60)
-        except RuntimeError as e:
-            print(str(e))
-            return
+    except RuntimeError as e:
+        print(str(e))
+        return
 
 
 # Makes the bot join the voice channel the user is in
@@ -88,8 +88,7 @@ async def play(ctx, *, search=None):
 
     # I will just put in the first result, you can loop the response to show more results
     youtube_video = 'https://www.youtube.com/watch?v=' + str(search_results[0])
-    if youtube_video_list is not None:
-        await ctx.send("Added the song to the playlist")
+    await ctx.send("Added the song to the playlist")
     youtube_video_list.append(youtube_video)
 
     # Looping over the youtube_video_list and playing the requests
@@ -98,41 +97,43 @@ async def play(ctx, *, search=None):
 
 
 async def play_music(ctx):
-    while youtube_video_list is not None:
-        # Gets Video out of playlist and leaves the voice channel after max 5 min if no music is playing anymore
-        try:
-            youtube_video = youtube_video_list.pop()
-        except IndexError:
-            await asyncio.sleep(300)
-            try:
-                if ctx.voice_client.is_playing():
-                    continue
-                await ctx.send("Leaving voice channel due to inactivity")
-                await ctx.voice_client.disconnect()
-            except AttributeError:
-                pass
-            return
-
-        # setting url for ffmpeg
-        with YoutubeDL(YDL_OPTIONS) as ydl:
-            try:
-                info = ydl.extract_info(youtube_video, download=False)
-            except DownloadError:
-                print("Error occurred while trying to fetch video")
-                await ctx.send("Error occurred while trying to fetch video :(")
-                return
-        URL = info['formats'][0]['url']
-
-        # playing the song and putting out the name of the song in chat
+    try:
         while True:
+            # Gets Video out of playlist and leaves the voice channel after max 5 min if no music is playing anymore
             try:
-                ctx.voice_client.play(FFmpegPCMAudio(URL, **FFMPEG_OPTIONS))
-                await ctx.send("Now playing: " + youtube_video)
-                break
-            except discord.errors.ClientException:
-                await asyncio.sleep(1)
-            except RuntimeError:
+                youtube_video = youtube_video_list.pop()
+            except IndexError:
+                await asyncio.sleep(300)
+                try:
+                    if ctx.voice_client.is_playing():
+                        continue
+                    await ctx.send("Leaving voice channel due to inactivity")
+                    await ctx.voice_client.disconnect()
+                except AttributeError:
+                    pass
                 return
+
+            # setting url for ffmpeg
+            with YoutubeDL(YDL_OPTIONS) as ydl:
+                try:
+                    info = ydl.extract_info(youtube_video, download=False)
+                except DownloadError:
+                    print("Error occurred while trying to fetch video")
+                    await ctx.send("Error occurred while trying to fetch video :(")
+                    return
+            URL = info['formats'][0]['url']
+
+            # playing the song and putting out the name of the song in chat
+            while True:
+                try:
+                    ctx.voice_client.play(FFmpegPCMAudio(URL, **FFMPEG_OPTIONS))
+                    await ctx.send("Now playing: " + youtube_video)
+                    break
+                except discord.errors.ClientException:
+                    await asyncio.sleep(1)
+    except RuntimeError as e:
+        print(e)
+        return
     return
 
 
@@ -166,11 +167,15 @@ async def resume(self):
 
 @client.command(pass_context=True, brief="Skips the current song.")
 async def skip(self):
-    if self.voice_client.is_playing():
-        self.voice_client.stop()
-        await self.send("Skipped the song")
-        await play_music(self)
-    else:
+    if len(youtube_video_list) == 0:
+        await self.send("Nothing to skip!")
+        return
+    try:
+        if self.voice_client.is_playing():
+            self.voice_client.stop()
+            await self.send("Skipped the song")
+            await play_music(self)
+    except AttributeError:
         await self.send("Nothing to skip!")
     return
 
