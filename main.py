@@ -169,7 +169,7 @@ async def skip(self):
     if self.voice_client.is_playing():
         self.voice_client.stop()
         await self.send("Skipped the song")
-        await play(self)
+        await play_music(self)
     else:
         await self.send("Nothing to skip!")
     return
