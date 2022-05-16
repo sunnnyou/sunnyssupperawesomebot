@@ -6,6 +6,7 @@ import asyncio
 import discord
 from discord.ext import commands
 from discord import FFmpegPCMAudio
+from discord.ext.commands import CommandNotFound
 from youtube_dl import YoutubeDL, DownloadError
 
 intents = discord.Intents.default()
@@ -25,6 +26,15 @@ async def on_ready():
     print("Discord bot was started")
     print(client.is_ws_ratelimited())
     # await pip_league()
+
+
+# Checks for wrongly typed in commands
+@client.event
+async def on_command_error(ctx, error):
+    if isinstance(error, CommandNotFound):
+        ctx.send("Command was typed in wrong or can't be found!")
+        return
+    raise error
 
 
 # every 60 seconds it checks if pip is playing league and if he does it will send a message in general every hour
