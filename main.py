@@ -168,7 +168,7 @@ async def resume(self):
 @client.command(pass_context=True, brief="Skips the current song.")
 async def skip(self):
     if len(youtube_video_list) == 0:
-        await self.send("Nothing to skip!")
+        await self.send("Playlist is empty!")
         return
     try:
         if self.voice_client.is_playing():
@@ -176,7 +176,7 @@ async def skip(self):
             await self.send("Skipped the song")
             await play_music(self)
     except AttributeError:
-        await self.send("Nothing to skip!")
+        await self.send("Bot is not playing anything!")
     return
 
 
