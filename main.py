@@ -32,7 +32,7 @@ async def on_ready():
 @client.event
 async def on_command_error(ctx, error):
     if isinstance(error, CommandNotFound):
-        ctx.send("Command was typed in wrong or can't be found!")
+        await ctx.send("Command was typed in wrong or can't be found!")
         return
     raise error
 
@@ -226,7 +226,7 @@ async def quote(ctx):
         print("Quote was sent")
         await ctx.send(randomMessage)
     except AttributeError:
-        ctx.send("This command cant be used in this server!")
+        await ctx.send("This command cant be used in this server!")
     return
 
 
