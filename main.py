@@ -288,6 +288,7 @@ async def on_message(message):
     for key, value in responseList.items():
         if key in message.content.lower():
             await message.channel.send(value)
+            return
 
     # Makes the client.command methods work
     await client.process_commands(message)
