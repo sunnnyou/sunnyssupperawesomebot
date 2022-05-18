@@ -16,7 +16,11 @@ intents.presences = True
 TOKEN = "OTI2MDcyODUwMzA4Mjc2MjM0.Yc2WjQ.kgZ0Rfu9h5Pvlkr7loQnzjrfldM"
 client = commands.Bot(command_prefix="!", intents=intents)
 youtube_video_list = []
-YDL_OPTIONS = {'format': 'bestaudio', 'noplaylist': 'True', 'outtmpl': 'ytdl/', 'verbose': 'True'}
+YDL_OPTIONS = {'format': 'bestaudio',
+               'noplaylist': 'True',
+               'outtmpl': 'ytdl/',
+               'verbose': 'True',
+               'youtube_include_dash_manifest': False}
 FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
 
 
