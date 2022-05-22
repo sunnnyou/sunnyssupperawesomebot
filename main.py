@@ -29,6 +29,7 @@ FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconne
 async def on_ready():
     print("Discord bot was started")
     print(client.is_ws_ratelimited())
+    print(client.latency)
     # await pip_league()
 
 
@@ -181,27 +182,20 @@ async def resume(self):
 
 @client.command(pass_context=True, brief="Skips the current song.")
 async def skip(self):
-    if len(youtube_video_list) == 0:
-        await self.send("Playlist is empty!")
-        return
     try:
         if self.voice_client.is_playing():
             self.voice_client.stop()
             await self.send("Skipped the song")
-            await play_music(self)
+        else:
+            raise AttributeError
     except AttributeError:
         await self.send("Bot is not playing anything!")
     return
 
 
-@client.command(pass_context=True, brief="Stops the song.")
+@client.command(pass_context=True, brief="Leaves the channel")
 async def stop(self):
-    try:
-        self.voice_client.stop()
-        await self.send("Stopping the damn song.")
-    except AttributeError:
-        await self.send("Bot is not playing anything!")
-    return
+    await leave(self)
 
 
 @client.command(pass_context=True, brief="Leaves the channel.")
@@ -285,7 +279,15 @@ async def on_message(message):
                  "always spewing random shit like poggers based cringe and when you try to explain what it is and you "
                  "just say that it's funny like what? What the fuck is funny about that do you think you'll just "
                  "become a stand-up comedian that will get a standing ovation just because you said \"cum\" in the "
-                 "stage? HELL NO YOU FUCKIN IDIOT, so please shut the fuck up and use words properly you dumb bitch "
+                 "stage? HELL NO YOU FUCKIN IDIOT, so please shut the fuck up and use words properly you dumb bitch ",
+        "ratio": "dont care + didnt ask + cry about it + stay mad + get real + L + mald seethe cope harder + h0es mad "
+                 "+ basic + skill issue + ratio + you fell off + the audacity + triggered + any askers + redpilled + "
+                 "get a life + ok and? + cringe + touch grass + donowalled + not based + your’re probably white + not "
+                 "funny didn’t laugh + you’re* + grammar issue + go outside + get good + reported + ad hominem + GG! "
+                 "+ ur momdon’t care + didn’t ask + cry about it + stay mad + get real + L + mald seethe cope harder "
+                 "+ hoes mad + basic + skill issue + ratio + you fell off + the audacity + triggered + any askers + "
+                 "redpilled + get a life + ok and? + cringe + touch grass + donowalled + not based + your’re a full "
+                 "time discordian + not funny didn’t laugh + you’re* + grammar issue + go outside + get good "
     }
 
     # Checks if key is message and if true, sends a message containing the value
