@@ -287,7 +287,8 @@ async def on_message(message):
                  "+ ur momdon’t care + didn’t ask + cry about it + stay mad + get real + L + mald seethe cope harder "
                  "+ hoes mad + basic + skill issue + ratio + you fell off + the audacity + triggered + any askers + "
                  "redpilled + get a life + ok and? + cringe + touch grass + donowalled + not based + your’re a full "
-                 "time discordian + not funny didn’t laugh + you’re* + grammar issue + go outside + get good "
+                 "time discordian + not funny didn’t laugh + you’re* + grammar issue + go outside + get good ",
+        "sex": "🤨📸"
     }
 
     # Checks if key is message and if true, sends a message containing the value
