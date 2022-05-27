@@ -289,7 +289,7 @@ async def on_message(message):
                  "redpilled + get a life + ok and? + cringe + touch grass + donowalled + not based + your’re a full "
                  "time discordian + not funny didn’t laugh + you’re* + grammar issue + go outside + get good ",
         "sex": "🤨📸",
-        "bitches": "No bitches?\n                    "
+        "bitches": "No bitches?"
                    "```diff\n"
                    "⣞⢽⢪⢣⢣⢣⢫⡺⡵⣝⡮⣗⢷⢽⢽⢽⣮⡷⡽⣜⣜⢮⢺⣜⢷⢽⢝⡽⣝ \n"
                    "⠸⡸⠜⠕⠕⠁⢁⢇⢏⢽⢺⣪⡳⡝⣎⣏⢯⢞⡿⣟⣷⣳⢯⡷⣽⢽⢯⣳⣫⠇\n"
