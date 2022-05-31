@@ -332,6 +332,7 @@ async def on_message(message):
                   "⣿⣿⠿⠃⠄⠄⣀⡀⠄⠄⠈⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⢹\n"
                   "⠄⠄⢀⡆⣰⠟⠷⣤⠤⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄\n"
                   "⠄⢀⠎⠄⠃⢀⠞⠉⢳⣴⣶⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣀\n```",
+        "big iron": "https://i.redd.it/nubuv16gyhk11.jpg"
     }
 
     # Checks if key is message and if true, sends a message containing the value
