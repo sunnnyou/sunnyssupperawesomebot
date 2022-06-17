@@ -248,6 +248,13 @@ async def on_message(message):
     if message.author == client.user or message.channel.name == 'quotes-channel':
         return
 
+    # Sends a special message after about every 1000th time
+    special_message_counter = random.randrange(0, 1111)
+    if special_message_counter == 1000:
+        await message.channel.send("ⓘ This user is registered on the Discord Hate and Terror watchlist. "
+                                   "For more information on the new safety guidelines visit "
+                                   "https://www.discord.com/safety)")
+
     # Dictionary with trigger word = key and response = value
     responseList = {
         "chad": "https://i.kym-cdn.com/entries/icons/original/000/026/152/gigachad.jpg",
@@ -339,7 +346,6 @@ async def on_message(message):
     for key, value in responseList.items():
         if key in message.content.lower():
             await message.channel.send(value)
-            return
 
     # Makes the client.command methods work
     await client.process_commands(message)
