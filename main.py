@@ -353,7 +353,8 @@ async def on_message(message):
                   "the manager told us to leave. I told him that my son is just excited about something, "
                   "and apologised. But the manager still told us to leave so I picked up the red trash can that my "
                   "son was going crazy over and threw it on the managers head. Then my son shouted “DEAD BODY "
-                  "REPORTED.” Can someone please tell me what on earth is wrong with him?"
+                  "REPORTED.” Can someone please tell me what on earth is wrong with him?",
+        "egg": "ah, yes, egg, one of the most popular forms of child to eat"
     }
 
     # Checks if key is message and if true, sends a message containing the value
