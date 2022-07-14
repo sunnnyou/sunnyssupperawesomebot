@@ -326,19 +326,19 @@ async def on_message(message):
                   "⠄⠄⢀⡆⣰⠟⠷⣤⠤⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄\n"
                   "⠄⢀⠎⠄⠃⢀⠞⠉⢳⣴⣶⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣀\n```",
         "nigga": "```diff\n" +
-                  "⣿⣿⣿⣿⡟⠄⣌⠻⣿⣿⣿⣿⣿⠟⠋⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿\n" +
-                  "⣿⣿⣿⣿⡇⢸⣭⡇⢽⣿⣿⠏⣀⣶⡇⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿\n"
-                  "⣿⣿⣿⣿⣷⣾⢿⣿⣿⣿⣿⣶⣭⣛⢃⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿\n"
-                  "⣿⣿⡛⠈⠛⠁⠙⠉⠛⠿⠛⢟⡿⣿⣷⡝⢿⡿⢻⣿⣿⣿⣿⣿⣿\n"
-                  "⣿⡹⠄⢀⣷⣶⣶⣿⣿⣿⣿⣷⣶⡍⠹⡿⠆⠙⣼⣿⣿⣿⣿⣿⣿\n"
-                  "⢫⣷⣧⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⠄⠄⢀⣴⣶⣏⡛⢿⣿⣿⣿⣿\n"
-                  "⢸⣿⣿⠛⠿⣿⣿⣿⣿⣿⣿⠿⠁⠄⠄⣾⣿⣿⣿⡟⣨⣿⣿⣿⣿\n"
-                  "⡘⣿⣿⣧⣀⣀⣹⣏⢀⣀⣀⣀⣠⡄⢸⣿⣿⣿⣿⢀⣿⣿⣿⣿⣿\n"
-                  "⣷⣼⣋⠈⣿⣿⣿⣿⣿⣿⣿⣿⠟⠄⠈⠛⢿⠏⢙⠈⠁⠄⠙⣿⣿\n"
-                  "⣿⣿⣿⠄⠹⠟⠛⠉⠡⠿⣿⡏⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠘⣿\n"
-                  "⣿⣿⠿⠃⠄⠄⣀⡀⠄⠄⠈⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⢹\n"
-                  "⠄⠄⢀⡆⣰⠟⠷⣤⠤⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄\n"
-                  "⠄⢀⠎⠄⠃⢀⠞⠉⢳⣴⣶⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣀\n```",
+                 "⣿⣿⣿⣿⡟⠄⣌⠻⣿⣿⣿⣿⣿⠟⠋⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿\n" +
+                 "⣿⣿⣿⣿⡇⢸⣭⡇⢽⣿⣿⠏⣀⣶⡇⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿\n"
+                 "⣿⣿⣿⣿⣷⣾⢿⣿⣿⣿⣿⣶⣭⣛⢃⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿\n"
+                 "⣿⣿⡛⠈⠛⠁⠙⠉⠛⠿⠛⢟⡿⣿⣷⡝⢿⡿⢻⣿⣿⣿⣿⣿⣿\n"
+                 "⣿⡹⠄⢀⣷⣶⣶⣿⣿⣿⣿⣷⣶⡍⠹⡿⠆⠙⣼⣿⣿⣿⣿⣿⣿\n"
+                 "⢫⣷⣧⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⠄⠄⢀⣴⣶⣏⡛⢿⣿⣿⣿⣿\n"
+                 "⢸⣿⣿⠛⠿⣿⣿⣿⣿⣿⣿⠿⠁⠄⠄⣾⣿⣿⣿⡟⣨⣿⣿⣿⣿\n"
+                 "⡘⣿⣿⣧⣀⣀⣹⣏⢀⣀⣀⣀⣠⡄⢸⣿⣿⣿⣿⢀⣿⣿⣿⣿⣿\n"
+                 "⣷⣼⣋⠈⣿⣿⣿⣿⣿⣿⣿⣿⠟⠄⠈⠛⢿⠏⢙⠈⠁⠄⠙⣿⣿\n"
+                 "⣿⣿⣿⠄⠹⠟⠛⠉⠡⠿⣿⡏⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠘⣿\n"
+                 "⣿⣿⠿⠃⠄⠄⣀⡀⠄⠄⠈⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⢹\n"
+                 "⠄⠄⢀⡆⣰⠟⠷⣤⠤⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄\n"
+                 "⠄⢀⠎⠄⠃⢀⠞⠉⢳⣴⣶⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣀\n```",
         "big iron": "https://i.redd.it/nubuv16gyhk11.jpg",
         "among us": "I am a concerned father with a 13 year old child and I am here to seek help regarding my son. "
                     "Last week when we went to the supermarket, my son pointed to a red trash can and started jumping "
@@ -354,7 +354,17 @@ async def on_message(message):
                   "and apologised. But the manager still told us to leave so I picked up the red trash can that my "
                   "son was going crazy over and threw it on the managers head. Then my son shouted “DEAD BODY "
                   "REPORTED.” Can someone please tell me what on earth is wrong with him?",
-        "egg": "ah, yes, egg, one of the most popular forms of child to eat"
+        "egg": "ah, yes, egg, one of the most popular forms of child to eat",
+        "🗿": "🗿 is the worst emoji. It's horrendous and ugly. I hate it. The point of emojis is to show emotions, "
+              "but what emotion does this show? Do you just wake up in the morning and think \"wow, I really feel "
+              "like a massive fucking stone today\"? Its useless. I hate it. It just provokes a deep rooted anger "
+              "within me whenever I see it. I want to drive on over to the fucking emoji headquarters and kill it. If "
+              "this was the emoji movie I'd push it off a fucking cliff. People just comment 🗿 as if it's funny. Its "
+              "not. 🗿 deserves to die. He deserves to have his smug little stone face smashed in with a hammer. Oh "
+              "wow, it's a stone head, how fucking hilarious, I'll use it in every comment I post. NO. STOP IT. It "
+              "deserves to burn in hell. Why is it so goddamn smug. You're a fucking stone, you have no life goals, "
+              "you will never accomplish anything in life apart from pissing me off. When you die noone will mourn. I "
+              "hope you die. "
     }
 
     # Checks if key is message and if true, sends a message containing the value
