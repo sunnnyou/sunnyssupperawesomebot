@@ -363,8 +363,9 @@ async def on_message(message):
               "not. 🗿 deserves to die. He deserves to have his smug little stone face smashed in with a hammer. Oh "
               "wow, it's a stone head, how fucking hilarious, I'll use it in every comment I post. NO. STOP IT. It "
               "deserves to burn in hell. Why is it so goddamn smug. You're a fucking stone, you have no life goals, "
-              "you will never accomplish anything in life apart from pissing me off. When you die noone will mourn. I "
-              "hope you die. "
+              "you will never accomplish anything in life apart from pissing me off. When you die no-one will mourn. I "
+              "hope you die. ",
+        "cringe": "https://cdn.discordapp.com/attachments/846843052294668308/997936351045484594/CRINGE.mp4"
     }
 
     # Checks if key is message and if true, sends a message containing the value
