@@ -9,7 +9,7 @@ from discord import FFmpegPCMAudio
 from discord.ext.commands import CommandNotFound
 from youtube_dl import YoutubeDL, DownloadError
 
-intents = discord.Intents.default()
+intents = discord.Intents.all()
 intents.members = True
 intents.presences = True
 
